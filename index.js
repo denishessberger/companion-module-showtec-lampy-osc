@@ -64,7 +64,7 @@ class LampyInstance extends InstanceBase {
 
 		this.setActionDefinitions({
 			pbFader: {
-				name: 'Set a playback faders level',
+				name: 'Playback Fader Value',
 				options: [
 					{
 						type: 'textinput',
@@ -75,7 +75,7 @@ class LampyInstance extends InstanceBase {
 					},
 					{
 						type: 'textinput',
-						label: 'Fader value (0-100 %)',
+						label: 'Fader value (0-1000)',
 						id: 'pbVal',
 						default: '',
 						regex: Regex.NUMBER,
@@ -90,7 +90,7 @@ class LampyInstance extends InstanceBase {
 				},
 			},
 
-			pbButton: {
+			pbButtonPress: {
 				name: 'Playback Button',
 				options: [
 					{
@@ -100,65 +100,107 @@ class LampyInstance extends InstanceBase {
 						default: '1',
 						regex: Regex.NUMBER,
 					},
+					{
+						type: 'dropdown',
+						label: 'Push / Release',
+						id: 'btnAction',
+						choices: [
+							{ id: '1.', label: 'Push' },
+							{ id: '0.', label: 'Release' },
+						],
+					}
 				],
 				callback: (action) => {
+					var arg = {
+						type: 'f',
+						value: action.options.btnAction,
+					}
 					sendOSC('/lampy/pbf/' + action.options.pbId + '/flash', arg)
 				},
 			},
 
-			execute: {
-				name: 'Execute',
+			mffFader: {
+				name: 'MFF Value',
 				options: [
 					{
 						type: 'textinput',
-						label: 'Execute Page',
-						id: 'exeP',
+						label: 'MFF (1-30)',
+						id: 'mffId',
 						default: '1',
 						regex: Regex.NUMBER,
 					},
 					{
 						type: 'textinput',
-						label: 'Execute Nr',
-						id: 'exeNr',
-						default: '1',
-						regex: Regex.NUMBER,
-					},
-					{
-						type: 'textinput',
-						label: 'Execute Level: 0 = Release, 1 = Activate, 2-100 = Encoder Level',
-						id: 'exeVal',
-						default: '1',
+						label: 'Fader value (0-1000)',
+						id: 'mffVal',
+						default: '',
 						regex: Regex.NUMBER,
 					},
 				],
 				callback: (action) => {
 					var arg = {
 						type: 'i',
-						value: parseInt(action.options.exeVal),
+						value: action.options.mffVal,
 					}
-					sendOSC('/exec/' + action.options.exeP + '/' + action.options.exeNr, arg)
+					sendOSC('/lampy/mff/' + action.options.mffId + '/value', arg)
 				},
 			},
 
-			dbo: {
-				name: 'Desk Black Out DBO',
+			mffButtonPress: {
+				name: 'MFF Button',
 				options: [
 					{
-						type: 'dropdown',
-						label: 'On / Off',
-						id: 'dboId',
-						choices: [
-							{ id: '1', label: 'Black Out On' },
-							{ id: '0', label: 'Black Out Off' },
-						],
+						type: 'textinput',
+						label: 'MFF (1-30)',
+						id: 'mffId',
+						default: '1',
+						regex: Regex.NUMBER,
 					},
+					{
+						type: 'dropdown',
+						label: 'Push / Release',
+						id: 'btnAction',
+						choices: [
+							{ id: '1.', label: 'Push' },
+							{ id: '0.', label: 'Release' },
+						],
+					}
 				],
 				callback: (action) => {
 					var arg = {
-						type: 'i',
-						value: action.options.dboId,
+						type: 'f',
+						value: action.options.btnAction,
 					}
-					sendOSC('/dbo', arg)
+					sendOSC('/lampy/mff/' + action.options.mffId + '/flash', arg)
+				},
+			},
+
+			execButtonPress: {
+				name: 'Executor Button',
+				options: [
+					{
+						type: 'textinput',
+						label: 'Executor (1-40)',
+						id: 'execId',
+						default: '1',
+						regex: Regex.NUMBER,
+					},
+					{
+						type: 'dropdown',
+						label: 'Push / Release',
+						id: 'btnAction',
+						choices: [
+							{ id: '1.', label: 'Push' },
+							{ id: '0.', label: 'Release' },
+						],
+					}
+				],
+				callback: (action) => {
+					var arg = {
+						type: 'f',
+						value: action.options.btnAction,
+					}
+					sendOSC('/lampy/virtual_executor/' + action.options.execId + '/flash', arg)
 				},
 			},
 		})
