@@ -1,0 +1,32 @@
+{
+	"id": "showtec-lampy-osc",
+	"name": "showtec-lampy-osc",
+	"shortname": "lampy",
+	"description": "Module to control Lampy consoles via OSC",
+	"version": "2.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-showtec-lampy-osc.git",
+	"bugs": "https://github.com/bitfocus/companion-module-showtec-lampy-osc/issues",
+	"maintainers": [
+		{
+			"name": "Denis Hessberger",
+			"email": "d.hessberger@hessberger.es"
+		}
+	],
+	"legacyIds": [
+		"lampy"
+	],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../index.js"
+	},
+	"manufacturer": "Showtec",
+	"products": [
+		"Lampy"
+	],
+	"keywords": [
+		"Lighting"
+	]
+}

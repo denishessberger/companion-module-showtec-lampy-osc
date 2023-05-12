@@ -1,0 +1,21 @@
+{
+  "name": "showtec-lampy-osc",
+  "version": "2.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:raw": "eslint --ext .ts --ext .js --ignore-pattern dist --ignore-pattern pkg",
+    "lint": "yarn lint:raw ."
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitfocus/companion-module-showtec-lampy-osc.git"
+  },
+  "dependencies": {
+    "@companion-module/base": "~1.0"
+  },
+  "devDependencies": {
+    "@companion-module/tools": "^1.0.2"
+  }
+}
