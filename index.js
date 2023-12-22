@@ -533,6 +533,78 @@ class LampyInstance extends InstanceBase {
         },
       },
 
+      /************************
+      * VIRTUAL FX SPEED FADER COMMANDS
+      ************************/
+
+      fxSpeedFader: {
+        name: 'FX Speed Value',
+        options: [
+          {
+            type: 'textinput',
+            label: 'Fader value (0-1000)',
+            id: 'fxSpeedVal',
+            default: '',
+            regex: Regex.NUMBER,
+          },
+        ],
+        callback: (action) => {
+          var arg = {
+            type: 'i',
+            value: action.options.fxSpeedVal,
+          }
+
+          sendOSC('/lampy/virtual_fader/global_fx_speed/value', arg)
+        },
+      },
+      fxSpeedResetButton: {
+        name: 'FX Speed Reset Button',
+        options: [
+        ],
+        callback: (action) => {
+          var arg = {
+            type: 'f',
+            value: 1,
+          }
+          sendOSC('/lampy/virtual_fader/global_fx_speed/reset', arg)
+        },
+      },
+      fxSpeedDoubleButton: {
+        name: 'FX Speed Double Button',
+        options: [
+        ],
+        callback: (action) => {
+          var arg = {
+            type: 'f',
+            value: 1,
+          }
+          sendOSC('/lampy/virtual_fader/global_fx_speed/double', arg)
+        },
+      },
+      fxSpeedHalfButton: {
+        name: 'FX Speed Half Button',
+        options: [
+        ],
+        callback: (action) => {
+          var arg = {
+            type: 'f',
+            value: 1,
+          }
+          sendOSC('/lampy/virtual_fader/global_fx_speed/half', arg)
+        },
+      },
+      fxSpeedPauseButton: {
+        name: 'FX Speed Pause Button',
+        options: [
+        ],
+        callback: (action) => {
+          var arg = {
+            type: 'f',
+            value: 1,
+          }
+          sendOSC('/lampy/virtual_fader/global_fx_speed/pause', arg)
+        },
+      },
     })
   }
 }
