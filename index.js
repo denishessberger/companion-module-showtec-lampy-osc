@@ -13,6 +13,7 @@ class LampyInstance extends InstanceBase {
     this.config = config
     this.updateStatus('ok')
     this.updateActions()
+    this.updatePresets()
   }
 
   async destroy() {
@@ -606,6 +607,55 @@ class LampyInstance extends InstanceBase {
         },
       },
     })
+  }
+
+  updatePresets() {
+    const presets = {}
+    presets[`my_first_preset`] = {
+      type: 'button', // This must be 'button' for now
+      category: 'Test', // This groups presets into categories in the ui. Try to create logical groups to help users find presets
+      name: `My button`, // A name for the preset. Shown to the user when they hover over it
+      options: {
+        type: 'textinput',
+        label: 'Executor (1-40)',
+        id: 'execId',
+        default: '1',
+        regex: Regex.NUMBER,
+      },
+      style: {
+        // This is the minimal set of style properties you must define
+        text: `$(generic-module:some-variable)`, // You can use variables from your module here
+        size: 'auto',
+        color: '#FFFFFF',
+        bgcolor: '#000000',
+      },
+      steps: [
+        {
+          down: [
+            {
+              // add an action on down press
+              actionId: 'execButtonPress',
+              options: {
+                // options values to use
+                btnAction: 1,
+              },
+            },
+          ],
+          up: [
+            {
+              // add an action on down press
+              actionId: 'execButtonPress',
+              options: {
+                // options values to use
+                btnAction: 0,
+              },
+            },
+          ],
+        },
+      ],
+      feedbacks: [], // You can add some presets from your module here
+    }
+    this.setPresetDefinitions(presets)
   }
 }
 
