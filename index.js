@@ -295,14 +295,12 @@ class LampyInstance extends InstanceBase {
               },
             ],
           }
-
         ],
         callback: (action) => {
           var arg = {
             type: 'f',
             value: action.options.btnAction,
           }
-
           sendOSC('/lampy/virtual_executor/' + action.options.execId + '/flash', arg)
         },
       },
